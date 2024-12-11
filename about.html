@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - ExploreMore</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo-section">
+            <h1 class="logo">ExploreMore</h1>
+            <img src="https://png.pngtree.com/png-vector/20220720/ourmid/pngtree-palm-tree-silhouette-vector-png-image_6020890.png" alt="Palm Tree" class="palm-tree-header">
+        </div>
+        <div class="nav-buttons-header">
+            <a href="where-to.html" class="button">Where to?</a>
+            <a href="index.html" class="button">Home</a>
+        </div>
+    </div>
+
+    <h1>About</h1>
+    
+    <div class="content">
+        <p>Welcome to ExploreMore! Our mission is to provide travelers with comprehensive and up-to-date information about their next destination. Simply input the city you are interested in, and our platform will deliver a wealth of information, including current weather conditions,  and more. Whether you're planning a weekend getaway or an extended vacation, ExploreMore is your one-stop resource for making informed travel decisions. </p>
+
+    </div>
+
+    <div class="slider-container">
+        <div class="slider" id="imageSlider"></div>
+    </div>
+
+    <script>
+
+        const vacationImages = [
+            'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
+            'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1',
+            'https://images.unsplash.com/photo-1454391304352-2bf4678b1a7a',
+            'https://images.unsplash.com/photo-1519046904884-53103b34b206'
+        ];
+
+        const slider = document.getElementById('imageSlider');
+        let currentSlide = 0;
+
+
+        vacationImages.forEach((src, index) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.classList.add('slide');
+            if (index === 0) img.classList.add('active');
+            slider.appendChild(img);
+        });
+
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.slide');
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 3000);
+    </script>
+</body>
+</html>
+
+
+
