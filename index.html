@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="video.js"></script>
     <title>ExploreMore - Travel Smart</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -26,34 +27,5 @@
         YOUR ONE STOP SHOP FOR TRAVEL INFORMATION
     </div>
 
-    <script>
-        const planeImages = [
-            'https://images.unsplash.com/photo-1436491865332-7a61a109cc05',
-            'https://images.unsplash.com/photo-1544016768-982d1554f0b9',
-            'https://images.unsplash.com/photo-1570710891163-6d3b5c47248b',
-            'https://images.unsplash.com/photo-1583850473587-e58c718a21ff',
-            'https://images.unsplash.com/photo-1559628376-f3fe5f782a2e'
-        ];
-
-        const slider = document.getElementById('imageSlider');
-        let currentSlide = 0;
-
-        planeImages.forEach((src, index) => {
-            const img = document.createElement('img');
-            img.src = src;
-            img.classList.add('slide');
-            if (index === 0) img.classList.add('active');
-            slider.appendChild(img);
-        });
-
-        function nextSlide() {
-            const slides = document.querySelectorAll('.slide');
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
-
-        setInterval(nextSlide, 3000);
-    </script>
 </body>
 </html>

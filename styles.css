@@ -120,6 +120,16 @@ body {
     margin-right: 30px;
 }
 
+#weather_content {
+    display: none;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #e6e6e6;
+    border-radius: 10px;
+    text-align: center;
+}
+
 .content {
     max-width: 800px;
     margin: 40px auto;
