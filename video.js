@@ -7,21 +7,22 @@ function cityWeather() {
                 console.log(resJson.current);
                 document.getElementById('weather_content').style.display = 'block';
                 document.getElementById('weather_content').innerHTML = "<h2>Current weather in " + resJson.location.name + ", " +  resJson.location.region + ", " + resJson.location.country + ":</h2><br>";
-                document.getElementById('weather_content').innerHTML += "Temperature: " + resJson.current.temperature + "<br>";
-                document.getElementById('weather_content').innerHTML += "Rain: " + resJson.current.precip + "<br>";
-                document.getElementById('weather_content').innerHTML += "Wind Speed: " + resJson.current.wind_speed + "<br>";
-                document.getElementById('weather_content').innerHTML += "Humidity: " + resJson.current.humidity;
+                document.getElementById('weather_content').innerHTML += "Temperature: " + resJson.current.temperature + " °C<br>";
+                document.getElementById('weather_content').innerHTML += "Rain: " + resJson.current.precip + " MM<br>";
+                document.getElementById('weather_content').innerHTML += "Wind Speed: " + resJson.current.wind_speed + " KPH<br>";
+                document.getElementById('weather_content').innerHTML += "Humidity: " + resJson.current.humidity + " %";
         })
-}
+
   
 // Nominatim api call to get coordinates for open-meteo API
+
     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${locationInput}`)
         .then((res) => res.json())
         .then((geoData) => {
             if (geoData.length > 0) {
                 const latitude = geoData[0].lat;
                 const longitude = geoData[0].lon;
-
+                createMap(latitude, longitude);
                 // Backend fetch (Open-Meteo API Call Future Weather Forecast)
                 fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min`)
                     .then((res) => res.json())
@@ -38,6 +39,7 @@ function cityWeather() {
             }
         })
         .catch((error) => console.error("Error fetching coordinates:", error));
+
 }
 
 const planeImages = [
@@ -88,6 +90,15 @@ function nextSlide() {
 function load() {
     loadAbout();
     setInterval(nextSlide, 3000);
+}
+
+function createMap(lat, long) {
+    const map = L.map('map').setView([lat, long], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
 }
 
 window.onload = load();

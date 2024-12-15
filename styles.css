@@ -120,6 +120,8 @@ body {
     margin-right: 30px;
 }
 
+#map { height: 180px; }
+
 #weather_content {
     display: none;
     max-width: 800px;
