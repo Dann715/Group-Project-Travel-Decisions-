@@ -13,6 +13,32 @@ function cityWeather() {
                 document.getElementById('weather_content').innerHTML += "Humidity: " + resJson.current.humidity;
         })
 }
+  
+// Nominatim api call to get coordinates for open-meteo API
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${locationInput}`)
+        .then((res) => res.json())
+        .then((geoData) => {
+            if (geoData.length > 0) {
+                const latitude = geoData[0].lat;
+                const longitude = geoData[0].lon;
+
+                // Backend fetch (Open-Meteo API Call Future Weather Forecast)
+                fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        document.getElementById('weather_content').innerHTML += `
+                            <h3>Tomorrows Forecast:</h3>
+                            Max Temp Tomorrow: ${data.daily.temperature_2m_max[0]} °C<br>
+                            Min Temp Tomorrow: ${data.daily.temperature_2m_min[0]} °C<br>
+                        `;
+                    })
+                    .catch((error) => console.error("Error fetching forecast data:", error));
+            } else {
+                document.getElementById('weather_content').innerHTML += "Location not found. Please enter a valid city.<br>";
+            }
+        })
+        .catch((error) => console.error("Error fetching coordinates:", error));
+}
 
 const planeImages = [
     'https://images.unsplash.com/photo-1436491865332-7a61a109cc05',
