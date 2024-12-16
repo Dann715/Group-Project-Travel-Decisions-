@@ -145,6 +145,24 @@ body {
     text-align: center;
 }
 
+#fav {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fafff6;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#add {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffe8fb;
+    border-radius: 10px;
+    text-align: center;
+}
+
 .content {
     max-width: 800px;
     margin: 40px auto;

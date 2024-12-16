@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script defer src="video.js"></script>
     <title>About - ExploreMore</title>
     <link rel="stylesheet" href="styles.css">
@@ -26,11 +27,56 @@
 
     </div>
 
+    <div id="fav">
+        <h2>User's Favourite Locations</h2>
+    </div>
+
+    <div id="add">
+        <h2>Add your favorite location!</h2>
+        <div class="search-container">
+            <input type="text" placeholder="Input Favorite Location" id="locationInput" required>
+            <button class="button" onclick="supabaseDataAdd()">Submit</button>
+        </div>
+    </div>
+
     <div class="slider-container">
         <div class="slider" id="imageSlider"></div>
     </div>
 
 </body>
+
+<script>
+    const supabaseClient = supabase.createClient(
+        'https://niblfvtpriguhuygnhtg.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pYmxmdnRwcmlndWh1eWduaHRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQyOTc2NDYsImV4cCI6MjA0OTg3MzY0Nn0.6XWKhOWsqZccyIVO-yfFUVSCMVhaIpYjfp99n2ZDWnk'
+    );
+
+	async function supabaseDataAdd() {
+        const location = document.getElementById('locationInput').value;
+		const { data, error } = await supabaseClient
+                .from('favorite')
+                .insert([
+                    {place: location},
+                ])
+                .select();
+        supabaseDataLoad();
+    }
+    
+    async function supabaseDataLoad() {
+        document.getElementById('fav').innerHTML = "<h2>User's Favourite Locations</h2><br>";
+        const { data, error } = await supabaseClient
+            .from('favorite')
+            .select('*');
+            data.forEach(row => {
+                    document.getElementById('fav').innerHTML += row.place + "<br>";
+                });
+    }
+
+
+    supabaseDataLoad();
+
+</script>
+
 </html>
 
 
