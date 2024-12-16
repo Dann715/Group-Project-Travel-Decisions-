@@ -6,7 +6,20 @@
     <script defer src="video.js"></script>
     <title>ExploreMore - Travel Smart</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+<style>
+        #city-info {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e6e6e6;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+
+</style>
 <body>
     <div class="logo-container">
         <img src="https://png.pngtree.com/png-vector/20220720/ourmid/pngtree-palm-tree-silhouette-vector-png-image_6020890.png" alt="Palm Tree" class="palm-tree">
@@ -27,5 +40,38 @@
         YOUR ONE STOP SHOP FOR TRAVEL INFORMATION
     </div>
 
+    <h1>Random City</h1>
+    <div id="city-info"></div>
+
+    <script>
+        const supabaseClient = supabase.createClient(
+            'https://bewdxiinjigtfoyauefl.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJld2R4aWluamlndGZveWF1ZWZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQwMzYzMTMsImV4cCI6MjA0OTYxMjMxM30.2z6QUAxMSZzy6wbNH0RBZJxIr5epXd9hd58XMy8M-3s'
+        );
+
+        async function fetchRandomCity() {
+            const { data, error } = await supabaseClient
+                .from('Cities')
+                .select('*');
+
+            if (error) {
+                console.error('Error fetching data:', error);
+                return;
+            }
+
+            if (data && data.length > 0) {
+                const randomCity = data[Math.floor(Math.random() * data.length)];
+
+                document.getElementById('city-info').innerHTML = `
+                    <h2>City: ${randomCity.city}</h2>
+                    <p>Population: ${randomCity.population}</p>
+                `;
+            } else {
+                console.log('No data available');
+            }
+        }
+
+        fetchRandomCity();
+    </script>
 </body>
 </html>
