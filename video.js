@@ -1,7 +1,7 @@
 function cityWeather() {
     const locationInput = document.getElementById('cityInput').value;
     console.log(locationInput);
-    fetch(`http://api.weatherstack.com/current?access_key=23f8f4774a653bfdb515c61d101f5805&query=${locationInput}`)
+    fetch(`https://api.weatherstack.com/current?access_key=23f8f4774a653bfdb515c61d101f5805&query=${locationInput}`)
         .then((res) => res.json())
         .then((resJson) => {
                 console.log(resJson.current);
@@ -97,7 +97,7 @@ function createMap(lat, long) {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 }
 
