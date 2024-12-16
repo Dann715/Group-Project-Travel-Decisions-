@@ -9,6 +9,17 @@ body {
     align-items: center;
 }
 
+#city-info {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #e6e6e6;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    flex-grow: 1;
+}
+
 .logo-container {
     margin-top: 50px;
     text-align: center;
@@ -52,12 +63,11 @@ body {
 
 .slider-section,
 .slider-container {
-    position: fixed;
-    bottom: 0;
     width: 100%;
     height: 200px;
     background-color: rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    margin-top: 20px;
 }
 
 .slider {
@@ -80,14 +90,15 @@ body {
 }
 
 .footer-text {
-    position: fixed;
-    bottom: 20px;
     text-align: center;
     color: white;
     font-weight: bold;
     width: 100%;
     z-index: 2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: #5a5a5a;
+    padding: 20px 0;
+    position: relative;
 }
 
 .header {
@@ -120,7 +131,9 @@ body {
     margin-right: 30px;
 }
 
-#map { height: 180px; }
+#map { 
+    height: 180px; 
+}
 
 #weather_content {
     display: none;

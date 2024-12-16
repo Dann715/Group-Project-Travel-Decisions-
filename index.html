@@ -3,23 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script defer src="video.js"></script>
     <title>ExploreMore - Travel Smart</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<style>
-        #city-info {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #e6e6e6;
-            border-radius: 10px;
-            text-align: center;
-            width: 80%;
-            max-width: 600px;
-        }
 
-</style>
 <body>
     <div class="logo-container">
         <img src="https://png.pngtree.com/png-vector/20220720/ourmid/pngtree-palm-tree-silhouette-vector-png-image_6020890.png" alt="Palm Tree" class="palm-tree">
@@ -32,6 +21,10 @@
         <a href="about.html" class="button">About</a>
     </div>
 
+    <div id="city-info">
+        <h1>Random City</h1>
+    </div>
+
     <div class="slider-section">
         <div class="slider" id="imageSlider"></div>
     </div>
@@ -40,8 +33,6 @@
         YOUR ONE STOP SHOP FOR TRAVEL INFORMATION
     </div>
 
-    <h1>Random City</h1>
-    <div id="city-info"></div>
 
     <script>
         const supabaseClient = supabase.createClient(
@@ -62,7 +53,7 @@
             if (data && data.length > 0) {
                 const randomCity = data[Math.floor(Math.random() * data.length)];
 
-                document.getElementById('city-info').innerHTML = `
+                document.getElementById('city-info').innerHTML += `
                     <h2>City: ${randomCity.city}</h2>
                     <p>Population: ${randomCity.population}</p>
                 `;
